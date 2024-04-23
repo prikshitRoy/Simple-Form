@@ -1,14 +1,19 @@
+import { authOptions } from "../lib/auth";
 import { Button } from "../components/ui/button";
 import { RegisterDialog } from "./registerDialog";
+import { HomeHeader } from "@/components/header/home-header";
 
 import Link from "next/link";
 import Image from "next/image";
+import { getServerSession } from "next-auth";
 
-export default function Home() {
-  const isUserLogged = true;
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+  const isUserLogged = !!session;
 
   return (
     <div>
+      <HomeHeader isUserLogged={isUserLogged} />
       <section className="md:mt-20 md:px-32 px-4 mt-10">
         <div className="">
           <div className="flex justify-center">
